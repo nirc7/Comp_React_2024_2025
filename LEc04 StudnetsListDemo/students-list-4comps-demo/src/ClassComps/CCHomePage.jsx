@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import CCInputs from './CCInputs';
 import FCStudentsList from '../FuncComps/FCStudentsList';
+import FCInputs from '../FuncComps/FCInputs';
 
 export default class CCHomePage extends Component {
   constructor(props) {
@@ -34,7 +35,8 @@ export default class CCHomePage extends Component {
         border: 'solid black 2px',
         margin: 5, padding: 5, borderRadius: 10
       }}>
-        CCHomePage
+        CCHomePage <br />
+        <FCInputs sendStudent2Parent={this.getStudentFromChild}/>
         <CCInputs sendStudent2Parent={this.getStudentFromChild} />
         <FCStudentsList students={this.state.students} />
       </div>
