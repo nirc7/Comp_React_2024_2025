@@ -10,7 +10,7 @@ export default class LifRefsPropyDemo extends Component {
         this.state = { counter: 0, userName: "" };
         //go to DB select stidents...5secsetState ERROR!
 
-        let num=9;
+        let num = 9;
 
         this.txt = null;
     }
@@ -30,10 +30,12 @@ export default class LifRefsPropyDemo extends Component {
         console.log(newCoutner);
 
         console.log('before', this.state.counter);
-        this.setState({ counter: newCoutner });
+        this.setState({ counter: newCoutner }, () => {
+            console.log('after the state was chaged', this.state.counter);
+        });
         console.log('after', this.state.counter);
 
-        console.log( this.txt);
+        console.log(this.txt);
         this.txt.focus();
         this.txt.size = 10;
 
@@ -44,8 +46,17 @@ export default class LifRefsPropyDemo extends Component {
         this.setState({ userName: event.target.value.toUpperCase() });
     }
 
+    getDivNum = (id) => {
+        console.log(id);
+    }
+
+    getDivNum2 = (e) => {
+        console.log(e.target.dataset.divnum);
+    }
+
     render() {
-        console.log('render');
+        console.log('render counter =', this.state.counter);
+        //go to db in newcounter
         //SetState...ERROR
 
         return (
@@ -57,7 +68,19 @@ export default class LifRefsPropyDemo extends Component {
                 connected to state input With onchange<input type="text" name="userName" value={this.state.userName}
                     onChange={this.onTextChanged} placeholder='enter a num....' /> <br />
 
-                grade: <input type="text" ref={ ref1 => this.txt=ref1} />
+                grade: <input type="text" ref={ref1 => this.txt = ref1} /> <br /> <br />
+
+
+                <div onClick={() => {
+                    console.log(213);
+                    this.getDivNum(1);
+                }}>One</div>
+                <div onClick={() => this.getDivNum(2)}>Two</div>
+                <div onClick={() => this.getDivNum(3)}>Three</div> <br />
+
+                <div data-divnum={1} onClick={this.getDivNum2}>One</div>
+                <div data-divnum={2} onClick={this.getDivNum2}>Two</div>
+                <div data-divnum={3} onClick={this.getDivNum2}>Three</div>
             </div>
         )
     }
